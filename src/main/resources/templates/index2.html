@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>Insert title here</title>
+<script type="text/javascript">
+
+// Para entender o E comercial como simbolo Javascript e não como simbolo da tabela ASC
+//<![CDATA[
+function carregarDados(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	       // Typical action to be performed when the document is ready:
+	       document.getElementById("display").innerHTML = xhttp.responseText;
+	    }
+	};
+	xhttp.open("GET", "http://localhost:8081/clientes", true);
+	xhttp.send();
+}
+//]]>
+
+</script>
+</head>
+<body>
+	<button type="button" onclick="carregarDados()">Carregar</button>
+	<div id="display">
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<meta charset="utf-8" />
+<style>
+fieldset{
+	display:inline;
+}
+</style>
+<div>
+	
+	<form novalidate="novalidate" name="frmCliente">
+		<div>		
+			<label>Nome: </label>
+			<input type="text" ng-minlength="2" ng-maxlength="5" name="txtNome" ng-model="cliente.nome" required="required" />
+			<span ng-show="frmCliente.txtNome.$error.required && frmCliente.txtNome.$dirty">Campo Nome Obrigatório</span>
+		</div>
+		
+		<div>
+			<label>E-mail: </label>		
+			<input type="email" name="txtEmail" ng-model="cliente.email" required="required" />
+			<span ng-show="frmCliente.txtEmail.$error.required && frmCliente.txtEmail.$dirty">Campo E-mail Obrigatório</span>
+			<span ng-show="frmCliente.txtEmail.$error.email">Campo E-mail Inválido</span>
+		</div>
+		
+		<div>
+			<label>Estado:</label>
+			<select name="selEstado" ng-model="cliente.estado.id" required>
+				<option value="">Selecione um Estado..</option>
+				<option ng-selected="cliente.estado.id == estado.id"
+						ng-repeat="estado in estados" 
+						ng-value="estado.id">{{estado.uf}}</option>
+			</select>
+			<span ng-show="frmCliente.selEstado.$error.required && frmCliente.selEstado.$dirty">Estado Inválido</span>
+		</div>
+		
+		
+		<input type="button" value="Salvar" ng-click="salvarCliente()" ng-disabled="frmCliente.$invalid" />
+		<input type="button" value="Cancelar" ng-click="cancelarAlteracao()" ng-disabled="frmCliente.$invalid && !frmCliente.$dirty"/>
+		
+		<div>
+			<fieldset>
+				<legend>Formulário:</legend>
+				Valid:  {{ frmCliente.$valid }}
+			</fieldset>
+			<fieldset>
+				<legend>Nome:</legend>
+				Valid:  {{ frmCliente.txtNome.$valid }}<br>
+				<!-- Ao contrario do valido -->
+				Invalid:  {{ frmCliente.txtNome.$invalid }}<br>
+				
+				<!-- Pristine é se ele foi mexido -->
+				Pristine:  {{ frmCliente.txtNome.$pristine }}<br>
+				
+				<!-- Dirty é se ele não foi mexido -->
+				Dirty:  {{ frmCliente.txtNome.$dirty }}<br>
+				
+				<!-- Touched é se ele não foi mexido -->
+				Touched:  {{ frmCliente.txtNome.$touched }}
+			</fieldset>
+		</div>
+	</form>
+	
+	<br>
+	<div ng-repeat="cli in clientes">
+		{{cli.id + " - " + cli.nome + " - " + cli.estado.uf}} 
+		<input type="button" value="Alterar" ng-click="alterarCliente(cli)"/>
+		<input type="button" value="Excluir" ng-click="excluirCliente(cli)"/>
+		<a href="/clientes/{{cli.id}}">Detalhe</a>
+	</div>
+</div>
