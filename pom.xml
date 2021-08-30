@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<vaadin.version>14.1.28</vaadin.version>
+		<vaadin.version>14.6.8</vaadin.version>
 		<maven.compiler.release>11</maven.compiler.release>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.source>1.7</maven.compiler.source>
